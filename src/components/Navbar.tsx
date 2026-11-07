@@ -19,18 +19,23 @@ interface NavbarProps {
   onOpenJoinModal: (roleOrEventName?: string) => void;
 }
 
-const PRIMARY_NAV_LINKS = [
+// Full list of 9 sections
+const NAV_LINKS = [
   { label: 'ABOUT', href: '#about' },
+  { label: 'WHAT WE DO', href: '#activities' },
   { label: 'DIVISIONS', href: '#divisions' },
   { label: 'EVENTS', href: '#events' },
   { label: 'COMMUNITY', href: '#community' },
+  { label: 'STRUCTURE', href: '#structure' },
   { label: 'ROADMAP', href: '#roadmap' },
+  { label: 'GALLERY', href: '#gallery' },
+  { label: 'FAQ', href: '#faq' },
 ];
 
 const ALL_CATALOG_SECTIONS = [
   { label: 'About the Club', desc: 'Origins, philosophy & collegiate charter', href: '#about' },
   { label: 'What We Do', desc: 'Tournaments, casting, workshops & LAN ops', href: '#activities' },
-  { label: 'Esports Divisions', desc: 'Mobile & PC gaming rosters', href: '#divisions' },
+  { label: 'Esports Divisions', desc: 'Mobile & PC gaming rosters (8 titles)', href: '#divisions' },
   { label: 'Event Roadmap', desc: 'Launch, Freshers Cup, Pro Series & LAN Finals', href: '#events' },
   { label: 'Our Community', desc: 'Student player, caster, dev & admin pathways', href: '#community' },
   { label: 'Club Structure', desc: 'Governance & operational student teams', href: '#structure' },
@@ -167,11 +172,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
             </div>
           )}
 
-          <div className="flex items-center justify-between w-full gap-2 sm:gap-4">
-            {/* Logo on Left - Compact and space-efficient */}
+          <div className="flex items-center justify-between w-full">
+            {/* Logo on Left - Explicit right margin so ABOUT never touches AFTER HOURS */}
             <button
               onClick={scrollToTop}
-              className="flex items-center text-left focus:outline-none group shrink-0"
+              className="flex items-center text-left focus:outline-none group shrink-0 mr-4 sm:mr-6 lg:mr-8"
               aria-label="AFTER HOURS Home"
             >
               <BrandLogo
@@ -181,15 +186,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
               />
             </button>
 
-            {/* Center Navigation Links - Desktop Quick Access (Guaranteed non-wrapping) */}
-            <nav className="hidden md:flex items-center gap-1 lg:gap-2 shrink-0">
-              {PRIMARY_NAV_LINKS.map((link) => {
+            {/* Center Navigation Links - Desktop (1300px+) with generous buffer space */}
+            <nav className="hidden 2xl:flex items-center gap-1.5 2xl:gap-2.5 shrink-0 mx-auto">
+              {NAV_LINKS.map((link) => {
                 const isActive = activeSection === link.href.substring(1);
                 return (
                   <a
                     key={link.label}
                     href={link.href}
-                    className={`whitespace-nowrap px-2.5 lg:px-3 py-1.5 rounded-sm text-xs font-heading font-semibold tracking-wider transition-all relative ${
+                    className={`whitespace-nowrap px-2 2xl:px-2.5 py-1 rounded-sm text-[11px] 2xl:text-xs font-heading font-semibold tracking-wider transition-all relative ${
                       isActive
                         ? 'text-white bg-ah-red/15 border-b-2 border-ah-red shadow-[0_0_12px_rgba(255,23,56,0.3)]'
                         : 'text-ah-silver hover:text-white hover:bg-white/5'
@@ -201,8 +206,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
               })}
             </nav>
 
-            {/* Right Controls - Perfectly Aligned, Guaranteed 100% Inside Frame */}
-            <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Right Controls - Explicit left margin so FAQ never touches REPLAY, and JOIN US is 100% inside frame */}
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-auto pl-2 sm:pl-4">
               {/* Replay Cinematic Intro button */}
               <button
                 onClick={onReplayIntro}

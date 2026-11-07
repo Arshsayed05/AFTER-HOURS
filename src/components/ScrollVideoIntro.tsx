@@ -20,12 +20,14 @@ export const ScrollVideoIntro: React.FC = () => {
   // Set video duration when metadata loads
   const handleLoadedMetadata = () => {
     if (videoRef.current) {
-      setVideoDuration(videoRef.current.duration || 10);
+      const dur = videoRef.current.duration || 10;
+      setVideoDuration(dur);
       setVideoLoaded(true);
+      videoRef.current.pause();
     }
   };
 
-  // Scroll handler to scrub the HQ Intra-Frame video smoothly
+  // Scroll handler to scrub the HQ Intra-Frame video smoothly while frame stays sticky
   const handleScroll = useCallback(() => {
     if (isAutoPlaying) return;
     const container = containerRef.current;
@@ -36,17 +38,19 @@ export const ScrollVideoIntro: React.FC = () => {
     const scrollableDistance = container.offsetHeight - window.innerHeight;
     if (scrollableDistance <= 0) return;
 
-    // How far user has scrolled into this container
+    // How far user has scrolled into this container (0 at top, 1 at bottom of intro)
     const scrolled = -rect.top;
     const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
 
     setScrollProgress(progress);
 
-    const dur = video.duration || videoDuration || 10;
-    const targetTime = progress * dur;
+    const dur = (video.duration && !isNaN(video.duration) && video.duration > 0)
+      ? video.duration
+      : (videoDuration || 10);
+    const targetTime = Math.min(dur - 0.04, Math.max(0, progress * dur));
 
     // Update video current time with threshold check to avoid redundant seek events
-    if (Math.abs(video.currentTime - targetTime) > 0.03) {
+    if (Math.abs(video.currentTime - targetTime) > 0.02) {
       video.currentTime = targetTime;
       setCurrentTime(targetTime);
     }
@@ -143,10 +147,14 @@ export const ScrollVideoIntro: React.FC = () => {
     <div
       ref={containerRef}
       id="cinematic-intro"
-      className="relative w-full h-[250vh] bg-black select-none"
+      className="relative w-full bg-black select-none"
+      style={{ minHeight: '250vh', height: '250vh' }}
     >
-      {/* Sticky Fullscreen Video Frame */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+      {/* Sticky Fullscreen Video Frame - Guaranteed Sticky at Viewport Top */}
+      <div
+        className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-black"
+        style={{ position: 'sticky', top: 0, height: '100vh', width: '100%', zIndex: 10 }}
+      >
         {/* Video Player: High Quality Intra-Frame Keyframe Video for 60fps instant scrub */}
         <video
           ref={videoRef}
@@ -155,6 +163,7 @@ export const ScrollVideoIntro: React.FC = () => {
           preload="auto"
           playsInline
           muted
+          autoPlay={false}
           onLoadedMetadata={handleLoadedMetadata}
           className="w-full h-full object-cover sm:object-contain bg-black pointer-events-none filter contrast-[1.05]"
         />
@@ -176,9 +185,9 @@ export const ScrollVideoIntro: React.FC = () => {
         <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,0,0,0.85)]" />
 
         {/* Top Header HUD */}
-        <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20 pointer-events-auto">
+        <div className="absolute top-4 sm:top-6 left-4 sm:left-6 right-4 sm:right-6 flex items-center justify-between z-20 pointer-events-auto">
           <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-ah-red animate-ping" />
+            <span className="w-2.5 h-2.5 rounded-full bg-ah-red animate-ping shrink-0" />
             <div>
               <span className="font-heading font-black text-xs md:text-sm tracking-widest text-white uppercase block">
                 AFTER HOURS // HQ ENTRANCE
@@ -223,7 +232,7 @@ export const ScrollVideoIntro: React.FC = () => {
         </div>
 
         {/* Center / Left Floating Stage Subtitle HUD */}
-        <div className="absolute left-6 md:left-12 bottom-24 md:bottom-28 z-20 pointer-events-none max-w-lg">
+        <div className="absolute left-4 sm:left-6 md:left-12 bottom-24 md:bottom-28 z-20 pointer-events-none max-w-lg">
           <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-black/70 border border-ah-red/40 backdrop-blur-md mb-2">
             <span className="w-1.5 h-1.5 rounded-full bg-ah-red" />
             <span className="font-mono text-[10px] md:text-xs text-ah-red font-bold tracking-widest uppercase">
@@ -241,7 +250,7 @@ export const ScrollVideoIntro: React.FC = () => {
         </div>
 
         {/* Bottom Scroll / Scrub Indicator */}
-        <div className="absolute bottom-6 left-6 right-6 z-20 pointer-events-auto">
+        <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6 z-20 pointer-events-auto">
           <div className="flex items-center justify-between text-[11px] font-mono text-ah-muted mb-2 tracking-wider">
             <span className="flex items-center gap-1.5 text-white font-semibold">
               <span className="text-ah-red">SCROLL POSITION:</span> {Math.round(scrollProgress * 100)}%
