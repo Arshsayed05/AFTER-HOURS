@@ -17,7 +17,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenJoinModal }) => {
   return (
     <section
       id="hero"
-      className="relative min-h-screen w-full flex flex-col justify-between items-center pt-28 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden select-none bg-black"
+      className="relative min-h-screen w-full flex flex-col justify-between items-center pt-32 sm:pt-36 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden select-none bg-black"
     >
       {/* Background Image: Deep Pitch Black with Subtle Atmospheric Contrast */}
       <div className="absolute inset-0 z-0 bg-black">
