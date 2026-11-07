@@ -100,11 +100,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
             : 'bg-gradient-to-b from-black/90 via-black/40 to-transparent py-5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center justify-between gap-2">
           {/* Logo on Left */}
           <button
             onClick={scrollToTop}
-            className="flex items-center text-left focus:outline-none group"
+            className="flex items-center text-left focus:outline-none group min-w-0"
             aria-label="AFTER HOURS Home"
           >
             <BrandLogo size="md" variant="full" />
@@ -134,7 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
           </nav>
 
           {/* Right Controls */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-3 shrink-0">
             {/* Replay Cinematic Intro button */}
             <button
               onClick={onReplayIntro}
@@ -157,11 +157,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center gap-2 xl:hidden">
+          <div className="flex items-center gap-1.5 sm:gap-2 xl:hidden shrink-0">
             <button
               onClick={onOpenJoinModal}
               type="button"
-              className="md:hidden px-3 py-1.5 bg-ah-red text-white font-heading font-bold text-[11px] tracking-wider uppercase esports-cut-sm"
+              className="md:hidden px-2.5 py-1.5 bg-ah-red text-white font-heading font-bold text-[10px] sm:text-[11px] tracking-wider uppercase esports-cut-sm"
             >
               JOIN
             </button>
@@ -170,9 +170,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
               aria-label="Toggle navigation menu"
-              className="p-2 text-ah-silver hover:text-white bg-white/5 border border-white/10 rounded-sm focus:outline-none"
+              className="p-1.5 sm:p-2 text-ah-silver hover:text-white bg-white/5 border border-white/10 rounded-sm focus:outline-none"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-ah-red" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-ah-red" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
         </div>
@@ -192,7 +192,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
 
         {/* Slide-out Panel */}
         <div
-          className={`absolute top-0 right-0 w-full sm:w-80 h-full bg-[#0d0d10] border-l border-white/10 shadow-2xl flex flex-col justify-between p-6 transition-transform duration-300 ease-out ${
+          className={`absolute top-0 right-0 w-full sm:w-80 max-w-[85vw] h-full bg-[#0d0d10] border-l border-white/10 shadow-2xl flex flex-col justify-between p-5 sm:p-6 overflow-y-auto transition-transform duration-300 ease-out ${
             mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >

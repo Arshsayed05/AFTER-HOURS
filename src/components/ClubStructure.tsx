@@ -30,7 +30,7 @@ export const ClubStructure: React.FC = () => {
           {CLUB_TEAMS.map((team, index) => (
             <div
               key={team.name}
-              className="p-6 sm:p-7 bg-[#111114] border border-white/10 hover:border-ah-red/40 rounded-sm transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.7)] flex flex-col justify-between esports-cut-sm bracket-card"
+              className="p-5 sm:p-7 bg-[#111114] border border-white/10 hover:border-ah-red/40 rounded-sm transition-all duration-300 hover:shadow-[0_10px_30px_rgba(0,0,0,0.7)] flex flex-col justify-between esports-cut-sm bracket-card"
             >
               <div>
                 {/* Header */}

@@ -15,14 +15,14 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
   showSubtitle = true,
 }) => {
   const logoDimensions = {
-    sm: 'h-8 w-8',
-    md: 'h-11 w-11 sm:h-12 sm:w-12',
-    lg: 'h-16 w-16 sm:h-20 sm:w-20',
-    xl: 'h-24 w-24 sm:h-32 sm:w-32',
+    sm: 'h-7 w-7 sm:h-8 sm:w-8',
+    md: 'h-9 w-9 sm:h-12 sm:w-12',
+    lg: 'h-14 w-14 sm:h-20 sm:w-20',
+    xl: 'h-20 w-20 sm:h-32 sm:w-32',
   };
 
   return (
-    <div className={`inline-flex items-center gap-3 select-none ${className}`}>
+    <div className={`inline-flex items-center gap-2 sm:gap-3 select-none min-w-0 ${className}`}>
       {/* Official Circular Shield Emblem */}
       <div className={`relative ${logoDimensions[size]} shrink-0 flex items-center justify-center`}>
         <img
@@ -34,13 +34,13 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
 
       {/* Typography beside logo when variant is 'full' */}
       {variant === 'full' && (
-        <div className="flex flex-col">
-          <div className="flex items-center text-lg md:text-xl font-heading font-black tracking-wider leading-none">
+        <div className="flex flex-col min-w-0">
+          <div className="flex items-center text-base sm:text-lg md:text-xl font-heading font-black tracking-wider leading-none">
             <span className="text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]">AFTER</span>
-            <span className="text-ah-red ml-1.5 text-glow-crimson">HOURS</span>
+            <span className="text-ah-red ml-1 sm:ml-1.5 text-glow-crimson">HOURS</span>
           </div>
           {showSubtitle && (
-            <span className="text-[9px] font-mono tracking-[0.22em] text-ah-silver uppercase mt-1">
+            <span className="hidden xs:inline-block text-[8px] sm:text-[9px] font-mono tracking-[0.16em] sm:tracking-[0.22em] text-ah-silver uppercase mt-0.5 sm:mt-1 truncate">
               ESPORTS CLUB • NMAMIT
             </span>
           )}

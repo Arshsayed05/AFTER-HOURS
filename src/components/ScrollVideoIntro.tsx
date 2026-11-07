@@ -143,10 +143,10 @@ export const ScrollVideoIntro: React.FC = () => {
     <div
       ref={containerRef}
       id="cinematic-intro"
-      className="relative w-full h-[250vh] bg-black select-none"
+      className="relative w-full h-[220vh] sm:h-[250vh] bg-black select-none overflow-x-hidden"
     >
       {/* Sticky Fullscreen Video Frame */}
-      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+      <div className="sticky top-0 h-[100dvh] w-full flex items-center justify-center overflow-hidden bg-black">
         {/* Video Player: High Quality Intra-Frame Keyframe Video for 60fps instant scrub */}
         <video
           ref={videoRef}
@@ -162,9 +162,9 @@ export const ScrollVideoIntro: React.FC = () => {
         {/* Loading Indicator */}
         {!videoLoaded && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/60 pointer-events-none z-10">
-            <div className="flex items-center gap-2 px-4 py-2 rounded bg-black/80 border border-ah-red/40">
-              <span className="w-2.5 h-2.5 rounded-full bg-ah-red animate-ping" />
-              <span className="font-mono text-xs text-ah-silver uppercase tracking-wider">
+            <div className="flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded bg-black/80 border border-ah-red/40">
+              <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-ah-red animate-ping" />
+              <span className="font-mono text-[10px] sm:text-xs text-ah-silver uppercase tracking-wider">
                 LOADING CINEMATIC FEED...
               </span>
             </div>
@@ -175,37 +175,37 @@ export const ScrollVideoIntro: React.FC = () => {
         <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black via-transparent to-black/70" />
         <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,0,0,0.85)]" />
 
-        {/* Top Header HUD */}
-        <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20 pointer-events-auto">
-          <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-ah-red animate-ping" />
-            <div>
-              <span className="font-heading font-black text-xs md:text-sm tracking-widest text-white uppercase block">
-                AFTER HOURS // HQ ENTRANCE
+        {/* Top Header HUD - Fully responsive on all phone screens */}
+        <div className="absolute top-3 sm:top-6 left-3 sm:left-6 right-3 sm:right-6 flex items-center justify-between z-20 pointer-events-auto gap-2">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-ah-red animate-ping shrink-0" />
+            <div className="min-w-0">
+              <span className="font-heading font-black text-[11px] sm:text-xs md:text-sm tracking-wider sm:tracking-widest text-white uppercase block truncate">
+                AFTER HOURS <span className="hidden sm:inline">// HQ ENTRANCE</span>
               </span>
-              <span className="font-mono text-[10px] text-ah-muted tracking-widest uppercase">
+              <span className="hidden sm:block font-mono text-[9px] md:text-[10px] text-ah-muted tracking-widest uppercase truncate">
                 SCROLL-DRIVEN CINEMATIC WALKTHROUGH
               </span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 sm:gap-3">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Autoplay / Scrub Toggle Button */}
             <button
               onClick={toggleAutoplay}
               type="button"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-sm bg-black/60 border border-white/15 hover:border-ah-red/50 text-ah-silver hover:text-white font-mono text-xs backdrop-blur-md transition-all"
+              className="flex items-center gap-1 sm:gap-1.5 px-2 py-1.5 sm:px-3 sm:py-1.5 rounded-sm bg-black/60 border border-white/15 hover:border-ah-red/50 text-ah-silver hover:text-white font-mono text-[10px] sm:text-xs backdrop-blur-md transition-all"
               title="Toggle Auto Playback"
             >
               {isAutoPlaying ? (
                 <>
-                  <Pause className="w-3.5 h-3.5 text-ah-red" />
-                  <span className="hidden sm:inline">PAUSE</span>
+                  <Pause className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-ah-red" />
+                  <span className="hidden xs:inline">PAUSE</span>
                 </>
               ) : (
                 <>
-                  <Play className="w-3.5 h-3.5 text-ah-red fill-current" />
-                  <span className="hidden sm:inline">AUTOPLAY</span>
+                  <Play className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-ah-red fill-current" />
+                  <span className="hidden xs:inline">AUTOPLAY</span>
                 </>
               )}
             </button>
@@ -214,37 +214,38 @@ export const ScrollVideoIntro: React.FC = () => {
             <button
               onClick={skipToHero}
               type="button"
-              className="group flex items-center gap-2 px-4 py-2 bg-ah-red hover:bg-ah-red-bright text-white font-heading font-black text-xs tracking-wider uppercase rounded-sm transition-all shadow-[0_0_15px_rgba(255,23,56,0.5)] esports-cut-sm"
+              className="group flex items-center gap-1.5 px-2.5 py-1.5 sm:px-4 sm:py-2 bg-ah-red hover:bg-ah-red-bright text-white font-heading font-black text-[10px] sm:text-xs tracking-wider uppercase rounded-sm transition-all shadow-[0_0_15px_rgba(255,23,56,0.5)] esports-cut-sm shrink-0"
             >
-              <span>ENTER SITE</span>
-              <FastForward className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+              <span className="hidden xs:inline">ENTER SITE</span>
+              <span className="xs:hidden">ENTER</span>
+              <FastForward className="w-3 h-3 sm:w-3.5 sm:h-3.5 transition-transform group-hover:translate-x-0.5" />
             </button>
           </div>
         </div>
 
-        {/* Center / Left Floating Stage Subtitle HUD */}
-        <div className="absolute left-6 md:left-12 bottom-24 md:bottom-28 z-20 pointer-events-none max-w-lg">
-          <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded bg-black/70 border border-ah-red/40 backdrop-blur-md mb-2">
+        {/* Center / Left Floating Stage Subtitle HUD - Positioned safely above bottom scrubber */}
+        <div className="absolute left-3 sm:left-6 md:left-12 right-3 sm:right-auto bottom-24 sm:bottom-32 z-20 pointer-events-none max-w-lg">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded bg-black/70 border border-ah-red/40 backdrop-blur-md mb-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-ah-red" />
-            <span className="font-mono text-[10px] md:text-xs text-ah-red font-bold tracking-widest uppercase">
+            <span className="font-mono text-[9px] sm:text-[10px] md:text-xs text-ah-red font-bold tracking-wider sm:tracking-widest uppercase">
               {stageInfo.stage}
             </span>
           </div>
 
-          <h3 className="font-heading font-black text-2xl md:text-4xl text-white tracking-tight drop-shadow-lg mb-1">
+          <h3 className="font-heading font-black text-lg sm:text-2xl md:text-4xl text-white tracking-tight drop-shadow-lg mb-0.5 sm:mb-1">
             {stageInfo.title}
           </h3>
 
-          <p className="font-sans text-xs md:text-sm text-ah-silver max-w-md drop-shadow">
+          <p className="font-sans text-[11px] sm:text-xs md:text-sm text-ah-silver max-w-md drop-shadow line-clamp-2 sm:line-clamp-none">
             {stageInfo.desc}
           </p>
         </div>
 
-        {/* Bottom Scroll / Scrub Indicator */}
-        <div className="absolute bottom-6 left-6 right-6 z-20 pointer-events-auto">
-          <div className="flex items-center justify-between text-[11px] font-mono text-ah-muted mb-2 tracking-wider">
-            <span className="flex items-center gap-1.5 text-white font-semibold">
-              <span className="text-ah-red">SCROLL POSITION:</span> {Math.round(scrollProgress * 100)}%
+        {/* Bottom Scroll / Scrub Indicator - Safe bottom inset */}
+        <div className="absolute bottom-2.5 sm:bottom-6 left-3 sm:left-6 right-3 sm:right-6 z-20 pointer-events-auto">
+          <div className="flex items-center justify-between text-[10px] sm:text-[11px] font-mono text-ah-muted mb-1.5 sm:mb-2 tracking-wider">
+            <span className="flex items-center gap-1 text-white font-semibold">
+              <span className="text-ah-red">SCROLL:</span> {Math.round(scrollProgress * 100)}%
             </span>
             <span className="text-ah-silver font-mono">
               {currentTime.toFixed(1)}s / {videoDuration.toFixed(1)}s
@@ -252,7 +253,7 @@ export const ScrollVideoIntro: React.FC = () => {
           </div>
 
           {/* Crimson Red Scrub Progress Bar */}
-          <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm relative">
+          <div className="w-full h-1 sm:h-1.5 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm relative">
             <div
               className="h-full bg-gradient-to-r from-ah-red via-ah-red-bright to-white transition-all duration-75 ease-linear shadow-[0_0_12px_#FF1738]"
               style={{ width: `${scrollProgress * 100}%` }}
@@ -261,13 +262,13 @@ export const ScrollVideoIntro: React.FC = () => {
 
           {/* Scroll Mouse Prompt */}
           <div
-            className="flex items-center justify-center gap-2 mt-3 text-ah-muted hover:text-white transition-colors cursor-pointer"
+            className="flex items-center justify-center gap-1.5 mt-2 sm:mt-3 text-ah-muted hover:text-white transition-colors cursor-pointer"
             onClick={skipToHero}
           >
-            <span className="font-mono text-[10px] tracking-[0.2em] uppercase text-ah-silver">
+            <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.15em] sm:tracking-[0.2em] uppercase text-ah-silver truncate">
               {scrollProgress >= 0.95 ? 'SCROLL DOWN TO ENTER SITE' : 'SCROLL DOWN TO WALK THROUGH'}
             </span>
-            <ChevronDown className="w-3.5 h-3.5 text-ah-red animate-bounce" />
+            <ChevronDown className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-ah-red animate-bounce shrink-0" />
           </div>
         </div>
       </div>

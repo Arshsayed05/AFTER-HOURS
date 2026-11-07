@@ -58,10 +58,10 @@ export const Roadmap: React.FC = () => {
                     )}
                   </div>
 
-                  {/* Content Box */}
-                  <div className="ml-12 sm:ml-0 sm:w-1/2 sm:px-8 w-full">
+                  {/* Content Box - Constrained width on mobile to avoid overflow */}
+                  <div className="w-[calc(100%-2.5rem)] ml-10 sm:ml-0 sm:w-1/2 sm:px-8">
                     <div
-                      className={`p-6 sm:p-7 bg-[#111114] border rounded-sm transition-all duration-300 hover:shadow-[0_10px_30px_rgba(255,23,56,0.1)] esports-cut-sm ${
+                      className={`p-4 sm:p-7 bg-[#111114] border rounded-sm transition-all duration-300 hover:shadow-[0_10px_30px_rgba(255,23,56,0.1)] esports-cut-sm ${
                         isCurrent
                           ? 'border-ah-red/60 shadow-[0_0_25px_rgba(255,23,56,0.15)] bg-gradient-to-br from-[#16161c] to-[#111114]'
                           : 'border-white/10 hover:border-white/20'

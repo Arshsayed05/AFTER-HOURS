@@ -42,11 +42,11 @@ export const TournamentsEvents: React.FC<TournamentsEventsProps> = ({ onOpenJoin
         </div>
 
         {/* 5 Event Roadmap Stages */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-12">
           {EVENT_ROADMAP.map((item, idx) => (
             <div
               key={item.step}
-              className={`p-6 sm:p-7 bg-[#111114] border rounded-sm transition-all duration-300 hover:shadow-[0_12px_35px_rgba(255,23,56,0.18)] flex flex-col justify-between esports-cut-sm bracket-card ${
+              className={`p-5 sm:p-7 bg-[#111114] border rounded-sm transition-all duration-300 hover:shadow-[0_12px_35px_rgba(255,23,56,0.18)] flex flex-col justify-between esports-cut-sm bracket-card ${
                 idx === 4
                   ? 'md:col-span-2 lg:col-span-2 border-ah-red/60 bg-gradient-to-br from-[#161214] via-[#111114] to-[#111114]'
                   : 'border-white/10 hover:border-ah-red/50'
@@ -54,23 +54,23 @@ export const TournamentsEvents: React.FC<TournamentsEventsProps> = ({ onOpenJoin
             >
               <div>
                 {/* Step Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4">
+                <div className="flex items-center justify-between pb-3 border-b border-white/5 mb-4 gap-2">
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xl sm:text-2xl text-ah-red font-black">
                       {item.step}.
                     </span>
-                    <span className="font-heading font-bold text-xs uppercase tracking-widest text-ah-silver">
+                    <span className="font-heading font-bold text-[11px] sm:text-xs uppercase tracking-widest text-ah-silver truncate">
                       {item.category}
                     </span>
                   </div>
 
-                  <span className="px-2 py-0.5 rounded bg-black/60 border border-white/10 font-mono text-[10px] text-ah-muted">
+                  <span className="px-2 py-0.5 rounded bg-black/60 border border-white/10 font-mono text-[9px] sm:text-[10px] text-ah-muted shrink-0">
                     {item.subtitle}
                   </span>
                 </div>
 
                 {/* Event Title */}
-                <h3 className="font-heading font-black text-xl sm:text-2xl text-white mb-2">
+                <h3 className="font-heading font-black text-lg sm:text-2xl text-white mb-2">
                   {item.title}
                 </h3>
 
@@ -103,7 +103,7 @@ export const TournamentsEvents: React.FC<TournamentsEventsProps> = ({ onOpenJoin
                   className="px-3 py-1.5 rounded-sm bg-white/5 hover:bg-white/10 text-ah-silver hover:text-white font-mono text-[11px] border border-white/10 transition-colors flex items-center gap-1.5"
                 >
                   <Info className="w-3.5 h-3.5 text-ah-red" />
-                  <span>VIEW DETAILS</span>
+                  <span>DETAILS</span>
                 </button>
 
                 <button
@@ -120,10 +120,10 @@ export const TournamentsEvents: React.FC<TournamentsEventsProps> = ({ onOpenJoin
         </div>
 
         {/* Institutional Oversight Notice */}
-        <div className="p-5 rounded-sm bg-black/60 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-ah-muted">
+        <div className="p-4 sm:p-5 rounded-sm bg-black/60 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 text-xs font-mono text-ah-muted">
           <div className="flex items-center gap-2 text-center md:text-left">
             <Shield className="w-4 h-4 text-ah-red shrink-0" />
-            <span>
+            <span className="text-[10px] sm:text-xs">
               ALL EVENTS SUBJECT TO INSTITUTIONAL APPROVAL, VENUE AVAILABILITY & TECHNICAL READINESS • NMAMIT NITTE
             </span>
           </div>
@@ -132,18 +132,18 @@ export const TournamentsEvents: React.FC<TournamentsEventsProps> = ({ onOpenJoin
             href={CLUB_CONFIG.socials.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-ah-red hover:underline decoration-ah-red/50 shrink-0 font-semibold"
+            className="flex items-center gap-1.5 text-ah-red hover:underline decoration-ah-red/50 shrink-0 font-semibold text-[10px] sm:text-xs"
           >
             <span>FOLLOW DATES ON INSTAGRAM @AFTERHOURS.NMAMIT</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-3.5 h-3.5 shrink-0" />
           </a>
         </div>
       </div>
 
-      {/* Stage Detail Modal */}
+      {/* Stage Detail Modal - Constrained to screen height on mobile */}
       {selectedStage && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
-          <div className="relative w-full max-w-lg p-6 sm:p-8 bg-[#111114] border border-ah-red/40 rounded-sm shadow-[0_0_50px_rgba(255,23,56,0.25)] esports-cut">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-lg max-h-[90dvh] overflow-y-auto p-5 sm:p-8 bg-[#111114] border border-ah-red/40 rounded-sm shadow-[0_0_50px_rgba(255,23,56,0.25)] esports-cut">
             <button
               onClick={() => setSelectedStage(null)}
               type="button"

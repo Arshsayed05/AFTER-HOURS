@@ -135,14 +135,14 @@ export const MediaGallery: React.FC = () => {
 
       {/* Lightbox Modal */}
       {currentItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-4 sm:p-8 select-none">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-md p-3 sm:p-8 select-none">
           {/* Close Button */}
           <button
             onClick={() => setActiveLightboxIndex(null)}
-            className="absolute top-6 right-6 z-50 p-2 text-ah-silver hover:text-white bg-black/60 hover:bg-white/10 border border-white/20 rounded-full transition-all"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-50 p-2 text-ah-silver hover:text-white bg-black/60 hover:bg-white/10 border border-white/20 rounded-full transition-all"
             aria-label="Close lightbox"
           >
-            <X className="w-6 h-6 text-ah-red" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6 text-ah-red" />
           </button>
 
           {/* Prev Button */}
@@ -153,10 +153,10 @@ export const MediaGallery: React.FC = () => {
                 prev !== null ? (prev - 1 + filteredItems.length) % filteredItems.length : null
               );
             }}
-            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-black/60 hover:bg-ah-red/80 text-white border border-white/15 transition-all"
+            className="absolute left-2 sm:left-8 top-1/2 -translate-y-1/2 z-50 p-2 sm:p-3 rounded-full bg-black/60 hover:bg-ah-red/80 text-white border border-white/15 transition-all"
             aria-label="Previous item"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           {/* Next Button */}
@@ -167,15 +167,15 @@ export const MediaGallery: React.FC = () => {
                 prev !== null ? (prev + 1) % filteredItems.length : null
               );
             }}
-            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 p-3 rounded-full bg-black/60 hover:bg-ah-red/80 text-white border border-white/15 transition-all"
+            className="absolute right-2 sm:right-8 top-1/2 -translate-y-1/2 z-50 p-2 sm:p-3 rounded-full bg-black/60 hover:bg-ah-red/80 text-white border border-white/15 transition-all"
             aria-label="Next item"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           {/* Media Content */}
-          <div className="relative max-w-5xl w-full max-h-[85vh] flex flex-col items-center justify-center">
-            <div className="relative max-h-[70vh] w-auto overflow-hidden rounded-sm border border-white/10 shadow-2xl bg-black">
+          <div className="relative max-w-5xl w-full max-h-[85dvh] flex flex-col items-center justify-center">
+            <div className="relative max-h-[65dvh] max-w-[90vw] overflow-hidden rounded-sm border border-white/10 shadow-2xl bg-black">
               <img
                 src={currentItem.src}
                 alt={currentItem.title}
