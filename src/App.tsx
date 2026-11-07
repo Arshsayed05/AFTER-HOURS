@@ -44,7 +44,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full max-w-[100vw] overflow-x-hidden bg-black text-[#F5F5F5] relative selection:bg-[#FF1738] selection:text-white">
+    <div className="min-h-screen bg-black text-[#F5F5F5] relative selection:bg-[#FF1738] selection:text-white">
       {/* 1. Scroll-Driven Cinematic Video Walkthrough at Top */}
       <ScrollVideoIntro />
 

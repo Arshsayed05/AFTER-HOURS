@@ -192,7 +192,7 @@ export const Footer: React.FC<FooterProps> = ({ onReplayIntro, onOpenJoinModal }
               &copy; {new Date().getFullYear()} AFTER HOURS Collegiate Esports Club. NMAMIT Nitte.
             </span>
             <span className="hidden sm:inline">•</span>
-            <span className="text-ah-muted">CREATE. COMPETE. CONQUER.</span>
+            <span className="text-ah-muted">PLAY. COMPETE. CONQUER.</span>
           </div>
 
           <button

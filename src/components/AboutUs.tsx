@@ -70,7 +70,7 @@ export const AboutUs: React.FC = () => {
           {CLUB_PILLARS.map((pillar) => (
             <div
               key={pillar.number}
-              className="group relative p-5 sm:p-8 bg-[#111114] border border-white/10 hover:border-ah-red/60 rounded-sm transition-all duration-300 hover:shadow-[0_10px_30px_rgba(255,23,56,0.15)] esports-cut-sm bracket-card"
+              className="group relative p-6 sm:p-8 bg-[#111114] border border-white/10 hover:border-ah-red/60 rounded-sm transition-all duration-300 hover:shadow-[0_10px_30px_rgba(255,23,56,0.15)] esports-cut-sm bracket-card"
             >
               <div className="flex items-center justify-between mb-5">
                 <div className="p-3 bg-black/60 rounded-sm border border-white/10 group-hover:border-ah-red/40 transition-colors">

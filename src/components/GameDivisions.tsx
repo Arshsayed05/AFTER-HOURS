@@ -149,7 +149,7 @@ export const GameDivisions: React.FC<GameDivisionsProps> = ({ onOpenJoinModal })
           />
 
           {/* Dialog Container */}
-          <div className="relative w-full max-w-2xl max-h-[90dvh] overflow-y-auto bg-[#111114] border border-ah-red/50 shadow-2xl rounded-sm p-5 sm:p-8 z-10 esports-cut">
+          <div className="relative w-full max-w-2xl bg-[#111114] border border-ah-red/50 shadow-2xl rounded-sm p-6 sm:p-8 z-10 esports-cut">
             {/* Close Button */}
             <button
               onClick={() => setSelectedDivision(null)}

@@ -113,7 +113,7 @@ export const CommunityRoles: React.FC<CommunityRolesProps> = ({ onOpenJoinModal 
           </div>
 
           {/* Right Column: Detailed Selected Pathway Card */}
-          <div className="lg:col-span-7 p-5 sm:p-8 bg-[#111114] border border-ah-red/40 rounded-sm esports-cut shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
+          <div className="lg:col-span-7 p-6 sm:p-8 bg-[#111114] border border-ah-red/40 rounded-sm esports-cut shadow-[0_10px_35px_rgba(0,0,0,0.8)]">
             <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-6">
               <div className="flex items-center gap-3">
                 <div className="p-3 bg-black/60 rounded-sm border border-ah-red/30">
