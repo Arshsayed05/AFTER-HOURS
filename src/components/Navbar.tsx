@@ -10,11 +10,12 @@ interface NavbarProps {
 
 const NAV_LINKS = [
   { label: 'ABOUT', href: '#about' },
-  { label: 'ACTIVITIES', href: '#activities' },
+  { label: 'WHAT WE DO', href: '#activities' },
   { label: 'DIVISIONS', href: '#divisions' },
-  { label: 'ROADMAP', href: '#events' },
+  { label: 'EVENTS', href: '#events' },
   { label: 'COMMUNITY', href: '#community' },
   { label: 'STRUCTURE', href: '#structure' },
+  { label: 'ROADMAP', href: '#roadmap' },
   { label: 'GALLERY', href: '#gallery' },
   { label: 'FAQ', href: '#faq' },
 ];
@@ -35,7 +36,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
       const currentScrollY = window.scrollY;
       const heroEl = document.getElementById('hero');
 
-      // 1. Check if user is inside the top cinematic intro walkthrough
+      // 1. Check if user is inside top cinematic intro walkthrough
       if (heroEl) {
         const heroRect = heroEl.getBoundingClientRect();
         setIsInIntro(heroRect.top > 80);
@@ -49,10 +50,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
       // 3. Dynamic smart hide on scroll down, show on scroll up
       const scrollDiff = currentScrollY - lastScrollYRef.current;
       if (currentScrollY <= 150) {
-        // At or near top of site (Hero), always keep visible
+        // At or near top of site (Hero), keep visible
         setIsNavVisible(true);
       } else if (scrollDiff > 12) {
-        // Scrolling DOWN -> hide header to maximize screen real estate and prevent overlapping
+        // Scrolling DOWN -> hide header to maximize screen space
         setIsNavVisible(false);
       } else if (scrollDiff < -8) {
         // Scrolling UP -> reveal header immediately
@@ -115,7 +116,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
     <>
       {/* Floating Dynamic Command Header */}
       <div
-        className={`fixed top-0 sm:top-3 left-0 right-0 z-40 px-0 sm:px-4 lg:px-6 transition-all duration-300 pointer-events-none ${
+        className={`fixed top-0 sm:top-3 left-0 right-0 z-40 px-2 sm:px-4 lg:px-6 w-full transition-all duration-300 pointer-events-none ${
           shouldShowNavbar
             ? 'translate-y-0 opacity-100'
             : '-translate-y-full sm:-translate-y-28 opacity-0'
@@ -124,8 +125,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
         <header
           className={`max-w-7xl mx-auto pointer-events-auto transition-all duration-300 relative overflow-hidden ${
             isScrolled
-              ? 'sm:rounded-md bg-[#09090c]/90 backdrop-blur-xl border-b sm:border border-white/10 shadow-[0_12px_35px_rgba(0,0,0,0.85)] hover:border-ah-red/30 py-2 sm:py-2.5 px-4 sm:px-6'
-              : 'bg-gradient-to-b from-black/90 via-black/40 to-transparent py-4 sm:py-5 px-4 sm:px-6'
+              ? 'sm:rounded-md bg-[#09090c]/90 backdrop-blur-xl border-b sm:border border-white/10 shadow-[0_12px_35px_rgba(0,0,0,0.85)] hover:border-ah-red/30 py-2 sm:py-2.5 px-3 sm:px-5 lg:px-6'
+              : 'bg-gradient-to-b from-black/95 via-black/50 to-transparent py-3 sm:py-4 px-3 sm:px-5 lg:px-6'
           }`}
         >
           {/* Real-time Hairline Reading Progress Beam along header bottom */}
@@ -138,29 +139,29 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
             </div>
           )}
 
-          <div className="flex items-center justify-between w-full gap-4">
-            {/* Logo on Left - Dynamically compacts on scroll */}
+          <div className="flex items-center justify-between w-full gap-2 sm:gap-4">
+            {/* Logo on Left - Compact and space-efficient */}
             <button
               onClick={scrollToTop}
               className="flex items-center text-left focus:outline-none group shrink-0"
               aria-label="AFTER HOURS Home"
             >
               <BrandLogo
-                size={isScrolled ? 'sm' : 'md'}
+                size="sm"
                 variant="full"
-                showSubtitle={!isScrolled}
+                showSubtitle={false}
               />
             </button>
 
-            {/* Center Navigation Links - Desktop (Streamlined & non-colliding) */}
-            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            {/* Center Navigation Links - Desktop (1280px+ with whitespace-nowrap) */}
+            <nav className="hidden xl:flex items-center gap-1 2xl:gap-2 min-w-0 justify-center">
               {NAV_LINKS.map((link) => {
                 const isActive = activeSection === link.href.substring(1);
                 return (
                   <a
                     key={link.label}
                     href={link.href}
-                    className={`px-2.5 py-1.5 rounded-sm text-xs font-heading font-semibold tracking-wider transition-all relative ${
+                    className={`whitespace-nowrap px-2 2xl:px-2.5 py-1 rounded-sm text-[11px] 2xl:text-xs font-heading font-semibold tracking-wider transition-all relative ${
                       isActive
                         ? 'text-white bg-ah-red/15 border-b-2 border-ah-red shadow-[0_0_12px_rgba(255,23,56,0.3)]'
                         : 'text-ah-silver hover:text-white hover:bg-white/5'
@@ -172,45 +173,54 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
               })}
             </nav>
 
-            {/* Right Controls */}
-            <div className="hidden md:flex items-center gap-2.5 shrink-0">
+            {/* Right Controls - Desktop (1280px+) */}
+            <div className="hidden xl:flex items-center gap-2.5 shrink-0">
               {/* Replay Cinematic Intro button */}
               <button
                 onClick={onReplayIntro}
                 type="button"
-                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-ah-red/40 text-ah-silver hover:text-white text-xs font-mono transition-all"
+                className="whitespace-nowrap flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm bg-white/5 hover:bg-white/10 border border-white/10 hover:border-ah-red/40 text-ah-silver hover:text-white text-xs font-mono transition-all"
                 title="Watch the cinematic entrance video again"
               >
-                <PlayCircle className="w-3.5 h-3.5 text-ah-red" />
-                <span className="hidden xl:inline">REPLAY INTRO</span>
-                <span className="xl:hidden">REPLAY</span>
+                <PlayCircle className="w-3.5 h-3.5 text-ah-red shrink-0" />
+                <span>REPLAY INTRO</span>
               </button>
 
               {/* Crimson JOIN US button */}
               <button
                 onClick={onOpenJoinModal}
                 type="button"
-                className="relative px-4 sm:px-5 py-1.5 sm:py-2 bg-ah-red hover:bg-ah-red-bright text-white font-heading font-bold text-xs tracking-widest uppercase transition-all shadow-[0_0_15px_rgba(255,23,56,0.5)] hover:shadow-[0_0_25px_rgba(255,23,56,0.8)] esports-cut-sm active:translate-y-0.5"
+                className="whitespace-nowrap px-4 2xl:px-5 py-1.5 2xl:py-2 bg-ah-red hover:bg-ah-red-bright text-white font-heading font-bold text-xs tracking-widest uppercase transition-all shadow-[0_0_15px_rgba(255,23,56,0.5)] hover:shadow-[0_0_25px_rgba(255,23,56,0.8)] esports-cut-sm active:translate-y-0.5 shrink-0"
               >
                 JOIN US
               </button>
             </div>
 
-            {/* Mobile / Tablet Menu Button */}
-            <div className="flex items-center gap-2 lg:hidden">
+            {/* Right Controls - Tablet & Mobile (< 1280px) - Guaranteed inside frame */}
+            <div className="flex xl:hidden items-center gap-2 shrink-0">
+              <button
+                onClick={onReplayIntro}
+                type="button"
+                className="hidden sm:flex items-center gap-1.5 px-2.5 py-1.5 rounded-sm bg-white/5 hover:bg-white/10 border border-white/10 text-ah-silver hover:text-white text-xs font-mono transition-all shrink-0"
+                title="Replay Cinematic Intro"
+              >
+                <PlayCircle className="w-3.5 h-3.5 text-ah-red shrink-0" />
+                <span className="hidden md:inline">REPLAY</span>
+              </button>
+
               <button
                 onClick={onOpenJoinModal}
                 type="button"
-                className="px-3 py-1.5 bg-ah-red text-white font-heading font-bold text-[11px] tracking-wider uppercase esports-cut-sm"
+                className="whitespace-nowrap px-3.5 py-1.5 bg-ah-red hover:bg-ah-red-bright text-white font-heading font-bold text-xs tracking-wider uppercase esports-cut-sm shrink-0 shadow-[0_0_10px_rgba(255,23,56,0.4)]"
               >
-                JOIN
+                JOIN US
               </button>
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 type="button"
                 aria-label="Toggle navigation menu"
-                className="p-1.5 text-ah-silver hover:text-white bg-white/5 border border-white/10 rounded-sm focus:outline-none"
+                className="p-1.5 text-ah-silver hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 rounded-sm focus:outline-none shrink-0"
               >
                 {mobileMenuOpen ? <X className="w-5 h-5 text-ah-red" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -219,9 +229,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
         </header>
       </div>
 
-      {/* Mobile Slide-Out Navigation Drawer */}
+      {/* Mobile / Tablet Slide-Out Navigation Drawer */}
       <div
-        className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ${
+        className={`fixed inset-0 z-50 xl:hidden transition-all duration-300 ${
           mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -240,7 +250,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onReplayIntro, onOpenJoinModal }
           <div>
             {/* Header in Drawer */}
             <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
-              <BrandLogo size="sm" variant="full" />
+              <BrandLogo size="sm" variant="full" showSubtitle={false} />
               <button
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-1.5 text-ah-silver hover:text-white hover:bg-white/5 rounded-sm"
